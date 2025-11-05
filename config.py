@@ -1,52 +1,54 @@
-# ============================================================
-# ⚙️ CONFIGURATION FILE — Gemini Telegram Quiz Assistant
-# ============================================================
+# ----------------- Telegram API -----------------
+API_ID = <YOUR_API_ID>
+API_HASH = "<YOUR_API_HASH>"
 
-# 🔐 Telegram API credentials (replace with your own)
-API_ID = 123456
-API_HASH = "your_api_hash_here"
+# ----------------- Telegram Bot -----------------
+BOT_TOKEN = "<YOUR_BOT_TOKEN>"
 
-# 🤖 Telegram Bot Token (optional, if using bot mode)
-BOT_TOKEN = "your_bot_token_here"
-
-# 🎯 Target groups (support multiple)
+# ----------------- Multi-Group Support -----------------
 TARGET_GROUPS = [
-    "your_group_name_or_bot_username"
+    "group_name_here"
 ]
 
-# 🕓 Answer Speed Settings (for AUTO_TICK)
+# ----------------- Answer Speed -----------------
 # Options: "instant", "superfast", "fast", "normal"
-ANSWER_SPEED = "instant"
+ANSWER_SPEED = "superfast"
 
-# FAST_MODE reduces thinking + voting delay
-FAST_MODE = True
-
-# Automatically tick the correct answer in polls
-AUTO_TICK = True
-
-# Delay mapping in seconds for each speed mode
+# Mapping speeds to internal delays (seconds)
 SPEED_DELAY = {
-    "instant": 0.05,
-    "superfast": 0.1,
+    "instant": 0,
+    "superfast": 0.05,
     "fast": 0.2,
     "normal": 0.5
 }
 
-# Choose answer provider: "gemini" or "gpt"
-ANSWER_PROVIDER = "gemini"
+# Enable FAST_MODE (reduces wait times, uses short prompts)
+FAST_MODE = True
 
-# Gemini API keys (replace with your own)
+# Auto-tick correct poll option (do NOT send message, just vote)
+AUTO_TICK = True
+
+# ----------------- Gemini API -----------------
+# Supports multiple keys; fallback automatically if one fails
 GEMINI_API_KEYS = [
-    "your_gemini_api_key_1",
-    "your_gemini_api_key_2"
+    "<YOUR_GEMINI_API_KEY_1>",
+    "<YOUR_GEMINI_API_KEY_2>"
 ]
-
-# Gemini model version
 GEMINI_MODEL = "gemini-2.5-flash"
 
-# GPT API config (optional fallback)
-USE_GPT = True
-GPT_API_URL = "https://your_gpt_api_url_here"
-
-# Session folder
+# ----------------- Session Management -----------------
 SESSION_FOLDER = "sessions"
+
+# ----------------- Other Settings -----------------
+# Max number of QR login attempts per account
+MAX_QR_ATTEMPTS = 3
+COUNTDOWN_SECONDS = 1
+
+# Max number of mobile/2FA login attempts per account
+MAX_2FA_ATTEMPTS = 3
+
+# Telegram internal delays for async tasks (optional fine-tuning)
+ASYNC_DELAY = 0.05
+
+# ----------------- Logging -----------------
+LOG_LEVEL = "INFO"
