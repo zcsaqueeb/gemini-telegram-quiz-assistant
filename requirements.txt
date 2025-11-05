@@ -1,0 +1,7 @@
+telethon==1.33.1
+aiohttp==3.9.5
+certifi==2025.9.24
+google-genai==0.5.0
+qrcode==7.4
+rich==13.5.2
+colorama==0.4.6
