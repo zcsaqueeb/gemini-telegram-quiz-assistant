@@ -1,186 +1,147 @@
-# 🌌 Gemini AI Quiz Auto-Tick Bot
+# 🌌 Gemini AI Quiz Auto-Ticker Bot
 
-[![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org/)
-[![Telegram](https://img.shields.io/badge/Telegram-Bot-blue?logo=telegram)](https://telegram.org/)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/gemini-quiz-bot)](https://github.com/yourusername/gemini-quiz-bot/issues)
+**Gemini AI Quiz Bot** is a professional Telegram automation tool designed to **auto-tick correct poll answers** in groups and channels using **Google Gemini AI**, supporting **multi-account**, **multi-group**, and **advanced speed controls**.
 
----
-
-## 🚀 Overview
-
-**Gemini AI Quiz Bot** is a **professional, multi-account, multi-group Telegram bot** that automatically detects quizzes and polls, fetches the correct answer using **Google Gemini API**, and ticks the correct option in real-time.
-
-It’s designed for **speed, reliability, and pro-level console UI**, supporting multiple accounts, multi-group auto-tick, and multiple Gemini API keys with automatic failover.
+No messages are sent — the bot only selects the correct poll option automatically.
 
 ---
 
-## ✨ Features
+## ⚡ Features
 
-* ✅ Multi-account login via **QR code** or **mobile + 2FA**.
-* ✅ Multi-group & channel support.
-* ✅ Auto-tick correct quiz option only (no message spam).
-* ✅ Gemini API integration with multiple keys and **failover**.
-* ✅ Professional console dashboard:
-
-  * Clean question display
-  * Correct answer highlighted
-  * Accuracy & confidence meter
-  * Reasoning time displayed
-* ✅ Async polling & caching to reduce redundant API calls.
-* ✅ Countdown timers for automatic voting.
-* ✅ Fully configurable via `config.py`.
+* ✅ **Auto-tick correct poll options** (no messages sent)
+* 🤖 **Gemini AI-powered** poll answering
+* 🔄 **Multi-account support** with async login
+* 🏆 **Multi-group support** — single API call for all accounts in same group
+* ⏱ **Answer speed modes**: `instant`, `superfast`, `fast`, `normal`
+* 🔑 **QR login** with fallback to **phone + 2FA**
+* 🔄 **Gemini API fallback** — supports multiple keys
+* 📊 **Professional console UI** with confidence bar and reasoning time
+* 🗂 **Session management** — keeps logged-in sessions in `sessions/`
+* ⚡ **Optimized performance** with async delays and caching
 
 ---
 
-## 📦 Installation
+## 📝 Configuration
 
-1. **Clone this repository**
+Edit the `config.py` file to customize your setup:
+
+```python
+# ----------------- Telegram API -----------------
+API_ID = 1595346
+API_HASH = "your_api_hash_here"
+BOT_TOKEN = "your_bot_token_here"
+
+# ----------------- Multi-Group Support -----------------
+TARGET_GROUPS = ["group1", "group2"]
+
+# ----------------- Answer Speed -----------------
+ANSWER_SPEED = "superfast"  # Options: "instant", "superfast", "fast", "normal"
+SPEED_DELAY = {"instant":0, "superfast":0.05, "fast":0.2, "normal":0.5}
+FAST_MODE = True  # Reduce prompt length for speed
+
+# Auto-tick correct poll option
+AUTO_TICK = True
+
+# ----------------- Gemini API -----------------
+GEMINI_API_KEYS = [
+    "your_gemini_key_1",
+    "your_gemini_key_2"
+]
+GEMINI_MODEL = "gemini-2.5-flash"
+
+# ----------------- Session Management -----------------
+SESSION_FOLDER = "sessions"
+MAX_QR_ATTEMPTS = 3
+MAX_2FA_ATTEMPTS = 3
+
+# Countdown before voting
+COUNTDOWN_SECONDS = 1
+
+# Async fine-tuning
+ASYNC_DELAY = 0.05
+
+# Logging
+LOG_LEVEL = "INFO"
+```
+
+---
+
+## 🚀 How to Run
+
+1. Clone this repository:
 
 ```bash
 git clone https://github.com/yourusername/gemini-quiz-bot.git
 cd gemini-quiz-bot
 ```
 
-2. **Create a virtual environment**
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-```
-
-3. **Install dependencies**
+2. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+3. Edit `config.py` with your API credentials, target groups, and preferences.
 
-## ⚙️ Configuration
-
-Create a `config.py` file in the project root:
-
-```python
-# Telegram API
-API_ID = 123456
-API_HASH = "your_api_hash"
-BOT_TOKEN = "your_telegram_bot_token"
-
-# Session folder
-SESSION_FOLDER = "sessions"
-
-# Gemini API
-GEMINI_API_KEYS = ["your_first_api_key", "your_second_api_key"]
-GEMINI_MODEL = "gemini-2.5-flash"
-
-# Target Telegram groups or channels (name or username)
-TARGET_GROUPS = ["group1", "group2"]
-
-# Optional: enable fast mode for shorter prompts
-FAST_MODE = True
-
-# Countdown before auto-tick
-COUNTDOWN_SECONDS = 3
-```
-
----
-
-## ⚡ Usage
-
-1. Run the main script:
-
-```bash
-qr_code_and_number_loin_and_multiple_accoutns.py
-```
+4. Run the bot:
 
 ```bash
 number_login_only.py
 ```
+```bash
+qr_code_and_number_loin_and_multiple_accoutns.py
+```
 
-2. Enter the number of accounts you want to login.
-3. Scan the QR code sent to your Telegram bot **or enter phone + 2FA code**.
-4. The bot will automatically detect polls, fetch answers from Gemini, and tick the correct option.
-5. Multi-account and multi-group support is fully automated.
 
----
-
-## 🖥️ Console UI
-
-* Questions are displayed clearly, with correct answers highlighted.
-* Confidence meter shows how confident Gemini is about the answer.
-* Reasoning time is displayed in seconds.
-* No `TextWithEntities` clutter – clean and professional.
+5. Enter the number of accounts to login when prompted. The bot will attempt **QR login** first, then fallback to **phone + 2FA** if needed.
 
 ---
 
-## ⚡ Advanced Features
+## 🖥 Console Dashboard
 
-* Automatic caching of poll answers across multiple accounts to reduce API calls.
-* Gemini API failover: if one key fails, the bot automatically switches to the next key.
-* Configurable countdown for automated ticking.
-* Supports both QR code login and mobile login with 2FA fallback.
+* ✅ Clean professional display of question, options, confidence, and AI reasoning time.
+* 📊 Confidence bar shows AI confidence in the answer.
+* ⏱ Timer shows Gemini reasoning duration.
 
----
-
-## 📝 Example
+Example:
 
 ```
-🌌 GEMINI AI QUIZ ASSISTANT 🌌
-🤖 Gemini v2.10 - Multi-account & Multi-group Auto-Tick
-
-🧩 Gemini Poll Analysis
-Q: Who discovered penicillin?
-→ 1. Alexander Fleming
-  2. Marie Curie
-  3. Louis Pasteur
-  4. Thomas Edison
-
-Accuracy: 90%
-⏱ Gemini reasoning: 1.23s
-
+Q: How does LERN360 differ from traditional platforms?
+→ 1. It relies on AI, blockchain, and tokenized incentives
+  2. It uses paper certificates
+  3. It has no online system
+Confidence: 86%
+⏱ Gemini reasoning: 1.36s
 ✅ Auto-ticked option 1
 ```
 
 ---
 
-## 🔒 Security & Privacy
-
-* **Sessions** are stored locally in the `sessions/` folder.
-* Your Telegram credentials are never shared or stored outside your machine.
-* Gemini API keys are used securely and can be rotated automatically.
-
----
-
-## 📚 Requirements
+## ⚙ Requirements
 
 * Python 3.11+
 * Telethon
-* aiohttp
 * google-genai
-* rich
-* colorama
-* qrcode
+* aiohttp
 * certifi
+* colorama
+* rich
+* qrcode
 
 ---
 
-## 💡 Contribution
+## 📄 License
 
-Feel free to submit issues or pull requests! This bot is open-source and designed for **educational and automation purposes only**.
+MIT License © 2025
 
----
-
-## ⚖️ Disclaimer
-
-This bot **automatically interacts with Telegram polls**. Use responsibly. The author is not responsible for account restrictions if misused.
+**Author:** Saqueeb
 
 ---
 
-## 📌 License
+## 💡 Notes
 
-MIT License – see [LICENSE](LICENSE)
+* The bot only **ticks the correct poll option**; it does **not send any messages**.
+* Multiple accounts in the same group **share answers** to reduce API calls.
+* Supports **auto-fallback between Gemini API keys** if one fails.
 
-
-
-Do you want me to create that enhanced README next?
+---
